@@ -1,12 +1,24 @@
 package br.com.rafoso.gestao_custos.useCases;
 
 import br.com.rafoso.gestao_custos.model.Despesa;
+import br.com.rafoso.gestao_custos.repository.DespesaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CadastroDespesaUseCase {
-    public void execute(Despesa despesa){
 
+    @Autowired
+    private DespesaRepository despesaRepository;
+
+    public Despesa execute(Despesa despesa){
+
+        if(despesa.getCategoria() == null || despesa.getData() == null || despesa.getDescricao() == null || despesa.getEmail() == null){
+            throw new IllegalArgumentException("Preencher todos os campos");
+        }
+
+        despesa = despesaRepository.save(despesa);
+        return despesa;
     }
 
 }

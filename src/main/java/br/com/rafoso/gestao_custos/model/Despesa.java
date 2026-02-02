@@ -1,6 +1,7 @@
 package br.com.rafoso.gestao_custos.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.math.BigDecimal;
@@ -16,15 +17,19 @@ public class Despesa {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(nullable = false)
     private String descricao;
+    @Column(nullable = false)
     private LocalDate data;
+    @Column(nullable = false)
     private BigDecimal valor;
 
-    @Column(length = 100)
+    @Column(length = 100, nullable = false)
     private String categoria;
+    @Column(nullable = false)
     private String email;
 
-    @CreatedDate
+    @CreationTimestamp
     private LocalDate data_criacao;
 
     public UUID getId() {
